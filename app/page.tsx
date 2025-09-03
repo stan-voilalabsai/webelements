@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 
+
 // Chat content constants
 const USER_MESSAGE = "What is the EBITDA of Acme Corp for Q1 2024? What challenges did the company face?"
 
@@ -60,8 +61,11 @@ export default function LoopingChatInterface() {
   const [showCursor, setShowCursor] = useState(false)
   const [cursorType, setCursorType] = useState<"user" | "agent" | null>(null)
 
-  const timeoutRef = useRef<NodeJS.Timeout>()
-  const intervalRef = useRef<NodeJS.Timeout>()
+  // timers (browser-safe types)
+  const timeoutRef  = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  // numbers with an initial value
   const stateStartTime = useRef<number>(0)
   const pausedTime = useRef<number>(0)
   const chatContainerRef = useRef<HTMLDivElement>(null)
@@ -106,8 +110,14 @@ export default function LoopingChatInterface() {
 
   // State machine
   const transitionToState = (newState: AnimationState) => {
-    if (timeoutRef.current) clearTimeout(timeoutRef.current)
-    if (intervalRef.current) clearInterval(intervalRef.current)
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
 
     setState(newState)
     stateStartTime.current = Date.now()
