@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const isPages = process.env.GITHUB_PAGES === 'true'
-const repo = 'YOUR_REPO_NAME' // ← change this
+const repo = 'webelements' // 
 
 export default {
   output: 'export',                // static export (goes to ./out)
