@@ -1,4 +1,6 @@
 // app/layout.tsx
+import "./globals.css";   // 👈 add this
+
 export const metadata = {
     title: "My App",
     description: "Deployed to GitHub Pages",
@@ -15,3 +17,4 @@ export const metadata = {
       </html>
     );
   }
+  
