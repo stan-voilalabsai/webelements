@@ -3,3 +3,9 @@ export default {
     theme: { extend: {} },
     plugins: [],
   }
+module.exports = {
+    content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}"],
+    theme: { extend: {} },
+    plugins: [],
+  };
+  
